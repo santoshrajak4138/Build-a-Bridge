@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Build a Bridge</title>
+        <style>
+            body {
+                font-family: sans-serif;
+                background-color: pink;
+            }
+
+            #bridge {
+                width: 500px;
+                height: 500px;
+                border: 5px solid #000;
+                background-color: white;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="bridge"></div>
+        <script>
+
+            //Create the 2D array to represent the bridge
+            const bridge = Array(20).fill().map(x => Array(20));
+
+            //Initialize the array with null values
+            bridge.forEach(x => x.fill(null));
+
+            //Create the bridge
+            for (let i = 0; i < bridge.length; i++) {
+                for (let j = 0; j < bridge[i].length; j++) {
+                    if (i === 0) {
+                        bridge[i][j] = 'st';
+                    } else if (i === bridge.length - 1) {
+                        bridge[i][j] = 'en';
+                    } else if (i % 2 === 0) {
+                        bridge[i][j] = 'br';
+                    } else {
+                        bridge[i][j] = 'pl';
+                    }
+                }
+            }
+
+            // Render the bridge
+            const bridgeDiv = document.getElementById('bridge');
+            let html = '';
+            for (let i = 0; i < bridge.length; i++) {
+                html += '<div>';
+                for (let j = 0; j < bridge[i].length; j++) {
+                    const color = bridge[i][j] === 'st' ? 'red' :
+                        bridge[i][j] === 'en' ? 'blue' :
+                            bridge[i][j] === 'pl' ? 'yellow' : 'black';
+                    html += `<span style="display: inline-block; width: 40px; height: 40px; background-color: ${color}; border: 1px solid #000;"> &nbsp;</span>`;
+                }
+                html += '</div>';
+            }
+            bridgeDiv.innerHTML = html;
+
+
+        </script>
+    </body>
+</html>
